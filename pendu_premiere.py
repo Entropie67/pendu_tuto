@@ -42,20 +42,27 @@ def main(liste_mot):
     mot = choice(liste_mot)
     secret = [" _ " for l in mot]
     essais = 5
+    lettre_proposee = set()
     while essais > 0 and ' _ ' in secret:
         
         print("*" * 50)
-        print(mot, secret)
+        # print(mot, secret) # Mode triche
         affichage(secret)
         lettre = input("\nQuelle lettre proposes-tu ? \n")
         print("*" * 50)
-        if valide(mot,secret, lettre):
+        if valide(mot, secret, lettre):
             print('Tu as trouvé une lettre')
-            remplace(mot,secret, lettre)
+            remplace(mot, secret, lettre)
         else:
             print('non')
             essais -= 1
-    print(mot, secret)
-    
+            if lettre in lettre_proposee:
+                print("En plus c'est un lettre que tu as déjà proposée!!!!!!")
+        lettre_proposee.add(lettre)
+        # print(lettre_proposee)
+    if ' _ ' in secret:
+        print("Perdu !!!")
+    else:
+        print("Gagné !!")
 main(mots)
         
